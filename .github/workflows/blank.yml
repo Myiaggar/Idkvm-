@@ -20,5 +20,8 @@ jobs:
           echo "Runner IP (usually localhost): 127.0.0.1"
           echo "You must manually sign in to Chrome Remote Desktop inside the runner's GUI."
           echo "Use GitHub Actions 'Start Port Forwarding' or set up a reverse tunnel if needed."
+          echo "Session max duration: 6 hours."
 
       - name: Keep workflow alive for 6 hours
+        run: |
+          timeout /t 21600
