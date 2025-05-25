@@ -1,0 +1,24 @@
+name: Windows 10 Chrome Remote Desktop
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-crd:
+    runs-on: windows-latest
+    steps:
+      - name: Download Chrome Remote Desktop MSI
+        run: |
+          Invoke-WebRequest -Uri https://dl.google.com/chrome-remote-desktop/chrome-remote-desktop_current_x64.msi -OutFile chrome-remote-desktop.msi
+
+      - name: Install Chrome Remote Desktop silently
+        run: |
+          msiexec.exe /i chrome-remote-desktop.msi /quiet /qn /norestart
+
+      - name: Output info
+        run: |
+          echo "Runner IP (usually localhost): 127.0.0.1"
+          echo "You must manually sign in to Chrome Remote Desktop inside the runner's GUI."
+          echo "Use GitHub Actions 'Start Port Forwarding' or set up a reverse tunnel if needed."
+
+      - name: Keep workflow alive for 6 hours
